@@ -4,32 +4,32 @@ let position = 0;
 const LADDER = 1;
 const SNAKE = 2;
 
-// diceNumber is taking random value from 1 to 6
-function rollDice() {
-  let diceNumber = (Math.floor(Math.random() * 10) % 6) + 1;
-  return diceNumber;
-}
-//to check the options by taking random value from 0 to 2
-function option() {
-  let option = Math.floor(Math.random() * 10) % 3;
-  return option;
-}
-switch (option()) {
-  case LADDER:
-    position = position + rollDice();
-    console.log("player got the ladder and move to position: " + position);
-    break;
-  case SNAKE:
-    if (position == 0) {
-      console.log("player is currently at zero try again");
-      break;
-    } else {
-      position = position - rollDice();
-      console.log("player got the snake and move to position: " + position);
+while (position < 100) {
+    // diceNumber is taking random value from 1 to 6
+    let diceNumber = (Math.floor(Math.random() * 10) % 6) + 1;
+    //checking the option whether player get ladder or snake
+    let option = (Math.floor(Math.random() * 10) % 2) + 1;
+
+    switch (option) {
+        case LADDER:
+            position = position + diceNumber;
+            console.log(
+                `player got the ladder ${diceNumber} and move to position ${position}`
+            );
+            break;
+        case SNAKE:
+            if (position > 0) {
+                position = position - diceNumber;
+                console.log(
+                    `player got the snake ${diceNumber} and move to position: ${position}`
+                );
+            } else {
+                console.log("player is currently at position 0 try again");
+            }
+            break;
+        default:
+            console.log(
+                "Player is not playing will stay at the same position: " + position
+            );
     }
-    break;
-  default:
-    console.log(
-      "Player is at the starting position: " + position
-    );
 }
